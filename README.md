@@ -10,13 +10,13 @@ This script fetches a public Beatport playlist page and extracts track metadata 
 ## Usage
 
 ```bash
-./beatport_playlist_scraper.py "https://www.beatport.com/playlists/your-playlist-id"
+./beatport_playlist_scraper.py "https://www.beatport.com/playlists/share/6326317"
 ```
 
 Write output to a file:
 
 ```bash
-./beatport_playlist_scraper.py "https://www.beatport.com/playlists/your-playlist-id" -o playlist.json
+./beatport_playlist_scraper.py "https://www.beatport.com/playlists/share/6326317" -o playlist.json
 ```
 
 ## Output format
