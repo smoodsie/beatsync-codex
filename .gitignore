@@ -1,0 +1,19 @@
+# Environment variables (credentials)
+.env
+
+# Debug folder (screenshots from Selenium runs)
+debug/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Test outputs
+*.json
+*.html
+.venv/
+.vscode/
+.DS_Store

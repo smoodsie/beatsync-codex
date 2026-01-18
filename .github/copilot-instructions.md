@@ -15,6 +15,22 @@ A Python utility that scrapes Beatport playlist pages and extracts normalized tr
 4. **Normalize** (`normalize_track`): Maps inconsistent field names to standard output schema
 5. **Deduplicate** (`build_playlist_data`): Removes duplicates using song/artist/label tuple
 
+### Important Limitation: Pagination
+Beatport playlists use server-side pagination with API responses cached in the HTML. The initial page load (`__NEXT_DATA__`) contains only the first ~25 tracks. Remaining tracks exist in subsequent API pages (2, 3, 4, etc.) accessible via `next` URLs in the dehydratedState.
+
+**Browser Automation Option**: Run with `--browser` flag to use Selenium for JavaScript rendering. This loads the full page in a headless Chrome instance but may still only extract the first page of results depending on how Beatport's React app implements pagination (virtual scrolling vs explicit pagination buttons).
+
+```bash
+python beatport_playlist_scraper.py "https://www.beatport.com/playlists/..." --browser -o output.json
+```
+
+Requires: `pip install selenium` and ChromeDriver in PATH (Selenium will auto-download via webdriver-manager).
+
+**Known Constraints**:
+- The internal API endpoint (`api-internal.beatportprod.com`) blocks direct HTTP requests  
+- Beatport's React app uses virtual scrolling, making headless automation ineffective for loading all pages
+- Full playlist extraction would require either authenticated API access or interactive browser session tracking
+
 ### Field Mapping Strategy
 The scraper uses key sets (`TRACK_NAME_KEYS`, `ARTIST_KEYS`, etc.) to handle multiple field name variants from different Beatport API versions. When adding support for new Beatport response formats, add keys to these sets rather than creating format-specific code.
 
